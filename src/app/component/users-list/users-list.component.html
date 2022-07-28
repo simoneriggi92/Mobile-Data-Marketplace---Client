@@ -1,0 +1,12 @@
+<label *ngFor="let user of getValues(usersList)"
+       class="form-check list-group-item d-flex justify-content-between align-items-center">
+  <input (change)='updateMapAndChart($event, user)' [checked]="user.toAdd" name="check" ng-model="userCheckbox"
+         type="checkbox">{{user.usernameAlias}}
+  <span [ngStyle]="{'background-color': user.color}" class="badge badge-primary badge-pill">{{user.n_positions}}</span>
+
+</label>
+
+
+
+
+

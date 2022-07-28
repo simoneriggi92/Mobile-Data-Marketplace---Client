@@ -1,0 +1,22 @@
+<form [formGroup]="myForm">
+  <div class="form-group">
+    <div class="input-group">
+      <input #d2="bsDaterangepicker"
+             (ngModelChange)="onInputFieldChanged(myForm)"
+             [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"
+             [outsideClick]="true"
+             disabled
+             bsDaterangepicker
+             class="form-control"
+             formControlName="range"
+             placeholder="From - To"
+             type="text">
+
+      <div class="input-group-append">
+        <button (click)="d2.toggle()" class="btn btn-outline-secondary" type="button">
+          <fa-icon [icon]="faCalendar" class="fa fa-calendar"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

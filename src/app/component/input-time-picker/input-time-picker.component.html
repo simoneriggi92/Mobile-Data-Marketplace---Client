@@ -1,0 +1,16 @@
+<div class="form-group">
+  <div class="input-group">
+    <ng-template #popTemplate>
+      <ngb-timepicker (ngModelChange)="onInputFieldChanged(mytime)" [(ngModel)]="mytime"></ngb-timepicker>
+    </ng-template>
+    <input class="form-control" disabled
+           type="text"
+           value="{{mytime.hour}}:{{mytime.minute}}"/>
+
+    <div class="input-group-append">
+      <button [ngbPopover]="popTemplate" class="btn btn-outline-secondary" placement="bottom" type="button">
+        <fa-icon [icon]="faClock" class="fa fa-clock"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

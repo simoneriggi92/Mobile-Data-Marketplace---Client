@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <a (click)="collapseNavbar()" class="navbar-brand" routerLink="/">
+    <fa-icon [icon]="faMapMarkerAlt" class="d-inline-block align-top"></fa-icon>
+    Marketplace
+  </a>
+  <button (click)="toggleNavbar()" aria-controls="navbarsDefault" aria-expanded="false"
+          aria-label="Toggle navigation" class="navbar-toggler hidden-sm-up" data-target="#navbarsDefault"
+          type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngSwitch]="isCustomer() || isUser()" [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse"
+       id="navbarsDefault">
+    <ul class="navbar-nav mr-auto">
+      <li *ngSwitchCase="true" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLinkActive="active">
+        <a (click)="collapseNavbar()" class="nav-link" routerLink="/profile">Profile</a>
+      </li>
+      <li *ngSwitchCase="true" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLinkActive="active">
+        <a (click)="collapseNavbar()" class="nav-link" routerLink="/loadArchive">My Archives</a>
+      </li>
+      <li *ngSwitchCase="true" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLinkActive="active">
+        <a (click)="collapseNavbar()" class="nav-link" routerLink="/boughtArchive">Shopping List</a>
+      </li>
+      <li *ngSwitchCase="true" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLinkActive="active">
+        <a (click)="collapseNavbar()" class="nav-link" routerLink="/buyArchives">Buy Archives</a>
+      </li>
+      <li *ngIf="isAdmin()" [routerLinkActiveOptions]="{exact: true}" class="nav-item" routerLinkActive="active">
+        <a (click)="collapseNavbar()" class="nav-link" routerLink="/admin">Admin</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button (click)="collapseNavbar()" *ngIf="!isLogged()" class="btn btn-outline-light mr-sm-2" routerLink="/signin"
+              type="submit">
+        Register
+      </button>
+      <button (click)="collapseNavbar()" *ngIf="!isLogged()" class="btn btn-outline-light " routerLink="/login"
+              type="submit">
+        Login
+      </button>
+      <span *ngIf="isLogged()" class="navbar-text mr-sm-2">
+        Logged as <strong>{{authService.getUsername()}}</strong>
+      </span>
+      <button (click)="logoutUser()" (click)="collapseNavbar()" *ngIf="isLogged()" class="btn btn-outline-light mr-sm-2"
+              type="submit">
+        Logout
+      </button>
+    </form>
+
+  </div>
+</nav>

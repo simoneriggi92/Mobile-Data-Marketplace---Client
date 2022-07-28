@@ -1,0 +1,10 @@
+.main-map-height {
+  min-height: 100vh;
+}
+
+.marker-user {
+  border-radius: 50%;
+  box-shadow: 0 0 5px #363636;
+}
+
+

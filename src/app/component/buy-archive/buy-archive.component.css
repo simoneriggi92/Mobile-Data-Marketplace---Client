@@ -1,0 +1,38 @@
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto
+}
+
+/* no-gutters Class Rules */
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .fixed-position {
+    width: 50%;
+    margin-left: 50%;
+    min-height: 100%;
+    position: fixed;
+  }
+}
+
+.menu-scroll {
+  overflow-y: scroll;
+  max-height: 150px;
+}
+
+.main {
+  margin-bottom: 5%;
+}
+
+

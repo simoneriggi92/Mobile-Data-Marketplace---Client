@@ -1,0 +1,57 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Checkout</h4>
+    <button (click)="c('Cross click')" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      <ngb-alert *ngIf="messageError" [dismissible]="false" type="danger">{{messageError}}</ngb-alert>
+    </p>
+    <p>
+      <ngb-alert *ngIf="messageSuccess" [dismissible]="false" type="success">{{messageSuccess}}</ngb-alert>
+    </p>
+    <p>
+      <ngb-alert *ngIf="messageWarning" [dismissible]="false" type="warning">{{messageWarning}}</ngb-alert>
+    </p>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Archives related to the selected positions
+        <span class="badge badge-primary badge-pill">{{nArchives}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Positions in the archives
+        <span class="badge badge-primary badge-pill">{{nPositions}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Owners of the archives
+        <span class="badge badge-primary badge-pill">{{nUsers}}</span>
+      </li>
+      <li *ngIf="nAcceptedArchives" class="list-group-item d-flex justify-content-between align-items-center">
+        Bought Archives
+        <span class="badge badge-success badge-pill">{{nAcceptedArchives}}</span>
+      </li>
+      <li *ngIf="nRefusedArchives" class="list-group-item d-flex justify-content-between align-items-center">
+        Already Owned
+        <span class="badge badge-danger badge-pill">{{nRefusedArchives}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+        Bill
+        <span class="badge badge-primary badge-pill">{{price | currency:'EUR':true}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer text-center">
+    <button (click)="c('Cancel click')" *ngIf="paymentsResult" class="btn btn-danger pull-left" type="button">New purchase
+    </button>
+    <button (click)="confirmPayment()" *ngIf="!messageSuccess && !messageWarning && !messageError" class="btn btn-success pull-right"
+            type="button">
+      Buy
+    </button>
+    <button (click)="c('Cross click')" *ngIf="messageSuccess || messageWarning" class="btn btn-success float-right"
+            routerLink="/boughtArchive"
+            type="button">Go to Shopping List
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,50 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <!-- form card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 align="center" class="mb-0">Bought Archives</h3>
+            </div>
+            <div class="card-body">
+              <form class="form-login">
+                <div class="table-responsive">
+                  <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Date of purchase</th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let a of boughtArchives;">
+                      <td scope="row">
+                        <span class="badge badge-info">{{a.aliasID}}</span>
+                      </td>
+                      <td scope="row">
+                        {{a.boughtDate | date: 'MMM d, y h:mm:ss a'}}
+                      </td>
+                      <td class="text-right" scope="row">
+                        <div aria-label="Basic example" class="btn-group" role="group">
+                          <button (click)="downloadArchive(a.archive_id)" class="btn btn-primary btn-sm"
+                                  type="button">
+                            <fa-icon [icon]="faDownload"></fa-icon>
+                            Download
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

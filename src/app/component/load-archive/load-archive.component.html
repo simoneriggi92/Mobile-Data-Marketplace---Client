@@ -1,0 +1,96 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <ngb-alert (close)="dangerMessage = null" *ngIf="dangerMessage" align="center"
+                     type="danger">{{dangerMessage}}</ngb-alert>
+          <ngb-alert (close)="successMessage = null" *ngIf="successMessage" align="center"
+                     type="success">{{successMessage}}</ngb-alert>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <!-- form card -->
+          <div class="card">
+            <div class="card-header">
+              <h3 align="center" class="mb-0">Your Archives</h3>
+            </div>
+            <div class="card-body">
+              <form class="form-login">
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <app-input-range-datetime-picker (endToParent)="end=$event" (filterToParent)="showArchives()"
+                                                     (resetToParent)="reset=$event" (startToParent)="start=$event"
+                    >
+                    </app-input-range-datetime-picker>
+                  </div>
+                  <div class="col-md-3">
+                    <form class="form-inline">
+                      <button (click)="filterArchives(start, end)" *ngIf="!filter" [disabled]="reset"
+                              class="btn btn-primary mr-sm-2" type="button">
+                        Filter
+                      </button>
+                      <button (click)="showArchives()" *ngIf="filter" class="btn btn-primary" type="button">
+                        Reset
+                      </button>
+                    </form>
+                  </div>
+                  <div class="col-md-4">
+                    <div id="loadButton">
+                      <label class="btn btn-primary float-right">
+                        <fa-icon [icon]="faFileUpload"></fa-icon>
+                        Load Archive
+                        <input #fileUpload (change)="importFile($event)" (click)="fileUpload.value = null" accept=".json"
+                               style="display: none;" type="file">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Uploaded Date</th>
+                      <th scope="col">Units Sold</th>
+                      <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let a of archives;">
+                      <td scope="row">
+                        <span class="badge badge-info">{{a.aliasID}}</span>
+                      </td>
+                      <td scope="row">
+                        {{a.uploadTime * 1000 | date: 'MMM d, y h:mm:ss a'}}
+                      </td>
+                      <td>
+                        <span class="badge badge-success badge-pill">{{a.n_sold}}</span>
+                      </td>
+                      <td class="text-right" scope="row">
+                        <div aria-label="Basic example" class="btn-group" role="group">
+                          <button (click)="downloadArchive(a.id)" class="btn btn-primary btn-sm"
+                                  type="button">
+                            <fa-icon [icon]="faDownload"></fa-icon>
+                            Download
+                          </button>
+                          <button (click)="deleteArchive(a)" class="btn btn-danger btn-sm"
+                                  type="button">
+                            <fa-icon [icon]="faTrash"></fa-icon>
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

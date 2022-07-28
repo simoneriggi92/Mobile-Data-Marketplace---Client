@@ -1,0 +1,23 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+
+    <h4 *ngIf="isCustomer && !buyAck" class="modal-title">Procedi con l'acquisto</h4>
+    <h4 *ngIf="isCustomer && buyAck" class="modal-title">Esito acquisto</h4>
+    <h4 *ngIf="isUser" class="modal-title">Report</h4>
+
+    <button (click)="c('Cross click')" aria-label="Close" class="close" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="messageService.messages.length">
+      <div *ngFor='let message of messageService.messages'> {{message}} </div>
+    </div>
+  </div>
+  <div *ngIf="isCustomer && !buyAck" class="modal-footer">
+    <button (click)="c('Buy click')" class="btn btn-light" type="button">Compra</button>
+  </div>
+  <div *ngIf="isCustomer && buyAck" class="modal-footer">
+    <button (click)="c('Cross click')" class="btn btn-light" type="button">OK</button>
+  </div>
+</ng-template>

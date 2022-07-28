@@ -1,0 +1,18 @@
+<div (leafletMapMoveEnd)="onMapMove($event)"
+     (leafletMapReady)="onMapReady($event)"
+     (leafletMarkerClusterReady)="markerClusterReady($event)"
+     [leafletLayers]="layers"
+     [leafletMarkerClusterOptions]="markerClusterOptions"
+     [leafletMarkerCluster]="markerClusterData"
+     [leafletOptions]="options"
+     class="main-map-height"
+     leaflet>
+
+  <div (leafletDrawCreated)="onDrawCreated($event)"
+       (leafletDrawDeleted)="onDrawDeleted($event)"
+       (leafletDrawReady)="onDrawReady($event)"
+       *ngIf="enableDraw"
+       [leafletDrawOptions]="drawOptions"
+       leafletDraw>
+  </div>
+</div>

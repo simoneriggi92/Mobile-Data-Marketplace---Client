@@ -1,0 +1,149 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col-md-12">
+      <ngb-alert (close)="dangerMessage = null" *ngIf="dangerMessage" align="center"
+                 type="danger">{{dangerMessage}}</ngb-alert>
+      <ngb-alert (close)="successMessage = null" *ngIf="successMessage" align="center"
+                 type="success">{{successMessage}}</ngb-alert>
+
+      <div class="row mx-auto">
+            <h1>Hi, {{username}}</h1>
+      </div>
+      <div class="row">
+
+        <div class="col-md-6 mx-auto">
+          <!-- form card sign in -->
+          <div class="card">
+            <div class="card-header text-center">
+              <h3 class="mb-0">Recharge your wallet</h3>
+            </div>
+            <div class="card-body">
+              <form #billForm="ngForm" (ngSubmit)="updatePocket()" class="form-signin">
+                <div class="form-group">
+                  <h5 class="card-title">Balance: {{currentWallet | currency:'USD'}}</h5>
+                  <label for="username">Insert money</label>
+                  <input #bill="ngModel" [(ngModel)]="myWallet"
+                         class="form-control" id="wallet" name="wallet"
+                         pattern="^[+]?\d*$"
+                         required
+                         type="text">
+                  <div *ngIf="bill.invalid && (bill.dirty || bill.touched)" class="alert alert-danger">
+                    <div *ngIf="!bill.errors.required">
+                      Invalid value: insert integer value
+                    </div>
+                    <div *ngIf="bill.errors.required">
+                      Money Required
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <label></label>
+                <button [disabled]="bill.invalid" class="btn btn-primary btn-lg btn-block" type="submit">
+                  Recharge
+                </button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mx-auto">
+          <!-- form card sign in -->
+          <div class="card">
+            <div class="card-header text-center">
+              <h3 class="mb-0">Update Account</h3>
+            </div>
+            <div class="card-body">
+              <form #updateForm="ngForm" (ngSubmit)="updateAccount()" class="form-signin">
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <input class="form-control" disabled id="username"
+                         type="text"
+                         value={{username}}>
+                </div>
+
+                <div id="groupPassword" ngModelGroup="passwordGroup">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input #previousPass="ngModel" (input)="confirmPass.control.updateValueAndValidity()" [(ngModel)]="previousPassword" class="form-control"
+                           id="previousPassword"
+                           minlength="8"
+                           name="previousPassword"
+                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).*$"
+                           required
+                           type="password">
+                    <div *ngIf="previousPass.invalid && (previousPass.dirty || previousPass.touched)"
+                         class="alert alert-danger">
+                      <div *ngIf="previousPass.errors.required">
+                        Password is required
+                      </div>
+                      <div *ngIf="previousPass.errors.minlength">
+                        Password must be at least 8 characters long.
+                      </div>
+                      <div *ngIf="previousPass.errors?.pattern">
+                        Password must have at least one lowercase letter, one capitol letter, one number and a special
+                        character.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password">New password</label>
+                    <input #pass="ngModel" (input)="confirmPass.control.updateValueAndValidity()" [(ngModel)]="newPassword" class="form-control"
+                           id="password"
+                           minlength="8"
+                           name="newPassword"
+                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).*$"
+                           required
+                           type="password">
+                    <div *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+                         class="alert alert-danger">
+                      <div *ngIf="pass.errors.required">
+                        Password is required
+                      </div>
+                      <div *ngIf="pass.errors.minlength">
+                        Password must be at least 8 characters long.
+                      </div>
+                      <div *ngIf="pass.errors?.pattern">
+                        Password must have at least one lowercase letter, one capitol letter, one number and a special
+                        character.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="confirmPassword">Confirm new password</label>
+                    <input #confirmPass="ngModel" [(ngModel)]="confirmNewPassword" appConfirmEqualValidator="password" class="form-control"
+                           id="confirmPassword" name="confirmNewPassword"
+                           required
+                           type="password">
+                    <div *ngIf="confirmPass.invalid && (confirmPass.dirty || confirmPass.touched)"
+                         class="alert alert-danger">
+                      <div *ngIf="confirmPass.errors.required">
+                        Confirm Password is required
+                      </div>
+                      <div
+                        *ngIf="(confirmPass.dirty || confirmPass.touched) && confirmPass.errors?.notEqual && !confirmPass.errors.required">
+                        Password and Confirm Password doesn't match!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <label></label>
+                <button [disabled]="updateForm.form.invalid" class="btn btn-primary btn-lg btn-block"
+                        type="submit">
+                  Update
+                </button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

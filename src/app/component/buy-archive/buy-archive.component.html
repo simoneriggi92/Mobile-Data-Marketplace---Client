@@ -1,0 +1,118 @@
+<app-modal (resetPage)="resetComponents=resetChildComponents($event)"></app-modal>
+<div class="container-fluid">
+  <div class="row no-gutters">
+    <!-- Left Column -->
+    <div class="col-md-6">
+      <!-- Container -->
+      <div class="container pt-4">
+        <!-- Alert -->
+        <div class="row">
+          <div class="col-md-12">
+            <ngb-alert (close)="dangerMessage = null" *ngIf="dangerMessage" align="center"
+                       type="danger">{{dangerMessage}}</ngb-alert>
+          </div>
+        </div>
+        <!-- End Alert -->
+        <!-- Select Data Range Row -->
+        <div class="row pb-2">
+          <div class="col-md-12">
+            <!-- Select Data Range Card -->
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title text-center">
+                  <h5 class="mb-2">Select date and time range</h5>
+                </div>
+                <form class="form-login">
+                  <div class="form-group row">
+                    <div class="col-md-1">
+                      <!-- empty -->
+                    </div>
+                    <div class="col-md-10">
+                      <app-input-range-datetime-picker
+                        (endToParent)="endDate=$event; enabledGetPosition=true; isBuyable=false"
+                        (reset)="enabledGetPosition=!$event"
+                        (startToParent)="startDate=$event"
+                        (changeToParent)="resetCountClick()">
+                      </app-input-range-datetime-picker>
+                      <!-- fixed Buy button -->
+                    </div>
+                    <div class="col-md-1">
+                      <!-- empty -->
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-1">
+                      <!-- empty -->
+                    </div>
+                    <div class="col-md-5">
+                      <app-input-time-picker
+                        (startTimeToParent)="startTime=$event; isBuyable=false" (changeToParent)="resetCountClick()"></app-input-time-picker>
+                    </div>
+                    <div class="col-md-5">
+                      <app-input-time-picker
+                        (endTimeToParent)="endTime=$event; isBuyable=false" (changeToParent)="resetCountClick()"></app-input-time-picker>
+                    </div>
+                    <div class="col-md-1">
+                      <!-- empty -->
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-1">
+                      <!-- empty -->
+                    </div>
+                    <div class="col-md-5">
+                      <button (click)="countClick(); askPositions(startDate, endDate, startTime, endTime, generalPoints, true)" [disabled]="!enabledGetPosition"
+                              class="btn btn-primary btn-block mr-sm-2"
+                              type="button">
+                        Ask for positions
+                      </button>
+                    </div>
+                    <div class="col-md-5">
+                      <button (click)="buy(result, startDate, endDate, startTime, endTime);" [disabled]="!isBuyable" class="btn btn-primary btn-block mr-sm-2"
+                              type="button">Buy
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Select Data Range Row-->
+
+        <!-- User List Row-->
+        <div class="row pb-2">
+          <div class="col-md-12">
+            <ul class="list-group menu-scroll">
+              <app-users-list [positionsDrawable]="result">
+              </app-users-list>
+            </ul>
+          </div>
+        </div>
+        <!-- Timeline Row -->
+        <div class="row pb-2">
+          <div class="col-md-12">
+            <app-temporal-chart [positionsDrawable]="result"></app-temporal-chart>
+          </div>
+        </div>
+      </div>
+      <!-- End Container -->
+    </div>
+    <!-- End Left Column -->
+    <!-- Right Column -->
+
+    <div class="col-md-6 fixed-position">
+      <app-main-map (isDrawed)="isDrawed=$event"
+                    (onDrawDeletePolygon)="updateCounterOnDrawDeletePolygon($event)"
+                    (onCheckUncheckUser)="updateCounterOnCheckUncheckUser($event)"
+                    (pointsPolygonDrawed)="pointsInPolygon=$event"
+                    (pointsPolygonToParent)="generalPoints=$event"
+                    (sendPoints)="getPoints($event)"
+                    [positionsDrawable]="result"
+                    [totP]="totPositionsSelected">
+      </app-main-map>
+
+    </div>
+    <!-- End Right Column -->
+  </div>
+</div>
