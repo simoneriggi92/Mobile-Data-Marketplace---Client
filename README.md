@@ -1,14 +1,21 @@
 # Mobile Data Marketplace  WebApp
 Mobile Data Marketplace a WebApp which allows the commercialization of personal data relating to the position coordinates of an user. The WebApp exposes sign-up and login APIs.
 Based on the use of the Spring Boot framework, which offers a set of REST access points aimed at allowing the saving and access to sequences of geographical locations of individual users, according to the following requirements: User authentication is managed through the use of Spring Security and theOAuth2 protocol by appropriately configuring the endpoints needed to request an access token based on JWT (JSON Web Token)
+![image](https://github.com/user-attachments/assets/64be665b-732e-4b34-8a7a-d0a556b47f83)
 
 
 Defined three different roles for the control access: ADMIN, USER, CUSTOMER. Users with the ADMIN role can access all data stored by USERS and CUSTOMERS. Users with the USER role can save and later retrieve their data. Users with the CUSTOMER role can retrieve the number of positions present in an area delimited by a polygon in a given time interval, and subsequently decide whether or not to purchase the positions by recording the transaction;
+![image](https://github.com/user-attachments/assets/b9e359ce-69b2-418b-974d-9b68f5879cb6)
 
+![image](https://github.com/user-attachments/assets/9f469800-e919-4521-88bb-61432f3fc4dc)
 
 if this happens it will be necessary to attribute to the users who have provided the individual data a fraction of the price paid proportional to the amount of data actually purchased (as part of the logic, the transaction is simulated and no money exchange takes place)
 
-Each user has a personal profile page where he can recharges its personal wallet.
+![image](https://github.com/user-attachments/assets/f52cd596-299b-4453-bce8-f707d9057115)
+
+
+Each user has a personal profile page where he can recharges its personal wallet
+.![image](https://github.com/user-attachments/assets/ed84451c-336b-40d9-b0e6-c813a0bfd7ae)
 
 Used MongoDB to save data and perform geographic queries to determine the locations belonging to a given area.
 
